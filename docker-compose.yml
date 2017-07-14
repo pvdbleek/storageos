@@ -1,0 +1,17 @@
+version: '3.1'
+services:	
+ consul:
+        image: consul
+        command: agent -server -ui -client=0.0.0.0 -bootstrap-expect=3 -retry-join=consul -retry-join=consul -retry-join=consul -retry-interval 5s
+        deploy:
+            replicas: 3
+        ports:
+            - 8500:8500 
+        environment:
+            CONSUL_BIND_INTERFACE: 'eth2'
+            CONSUL_LOCAL_CONFIG: '{"skip_leave_on_interrupt": true}'
+        networks: 
+            - consul
+
+networks:
+   consul:
