@@ -1,0 +1,19 @@
+version: '3.1'
+services:
+    postgres-dev:
+        image: postgres
+        deploy:
+            replicas: 1
+        environment:
+            POSTGRES_PASSWORD: 'storageos'
+            PGDATA: '/var/lib/postgresql/data/pgdata'
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+        networks:
+            - postgres-dev
+networks:
+    postgres-dev:
+
+volumes:
+  pgdata:
+    external: true

@@ -1,0 +1,21 @@
+version: '3.1'
+services:
+    mssql-dev:
+        image: microsoft/mssql-server-linux
+        ports:
+          - 1433:1433
+        deploy:
+            replicas: 1
+        environment:
+            SA_PASSWORD: 'p@ssw0rd'
+            ACCEPT_EULA: 'Y'
+        volumes:
+            - mssql:/var/opt/mssql
+        networks:
+            - mssql-dev
+networks:
+    mssql-dev:
+
+volumes:
+  mssql:
+    external: true
