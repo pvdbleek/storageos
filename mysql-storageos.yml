@@ -1,0 +1,19 @@
+version: '3.1'
+services:
+    mysql-dev:
+        image: mysql
+        command: --ignore-db-dir=lost+found --explicit_defaults_for_timestamp
+        deploy:
+            replicas: 1
+        environment:
+            MYSQL_ROOT_PASSWORD: 'storageos'
+        volumes:
+            - mysqldata:/var/lib/mysql
+        networks:
+            - mysql-dev
+networks:
+    mysql-dev:
+
+volumes:
+  mysqldata:
+    external: true
